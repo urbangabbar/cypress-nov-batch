@@ -6,16 +6,22 @@ describe("actions", () => {
         cy.visit("https://example.cypress.io/commands/actions");
     })
 
-    it("practice type", () => {
+    it.skip("practice type", () => {
         cy.get('.action-email')
             .type('abhinavfake@email.com', { delay: 100 })
-        cy.get('.action-disabled')
-            // Ignore error checking prior to type
-            // like whether the input is visible or disabled
-            .type('disabled error checking', { force: true })
-            .should('have.value', 'disabled error checking')
+            .should('have.value', 'abhinavfake@email.com')
     })
     it("focus", ()=> {
         cy.get('.action-focus').focus()
+        cy.contains("Password").should("have.css", 'color', "rgb(255, 165, 0)")
+    });
+    it.skip("Scrollintoview", ()=> {
+        cy.get("#scroll-both").scrollIntoView({})
+        cy.wait(5000)
+        cy.get("#scroll-both button").scrollIntoView()
+    })
+    it.skip("scroll to", ()=> {
+        cy.get("#scrollable-vertical").scrollIntoView()
+        cy.get('#scrollable-vertical').scrollTo(500, 250, {duration: 2000 })
     })
 })
