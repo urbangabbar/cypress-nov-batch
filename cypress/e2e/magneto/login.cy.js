@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+// Should all properties https://docs.cypress.io/guides/references/assertions
+
 // 1) No first name provided - > Error on name field + form submission should not happen
 // 2) No last name provided - > Error on last field + form submission should not happen
 // 3) No Email name provided - > Error on Email field + form submission should not happen
