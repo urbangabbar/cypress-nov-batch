@@ -18,3 +18,8 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+cy.on('uncaught:exception', (err, runnable) => {
+    console.log("Uncaught Exception", err)
+    return false
+})
