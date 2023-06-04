@@ -7,8 +7,9 @@
 // 3) No Email name provided - > Error on Email field + form submission should not happen
 // 4) Invalid Email name provided - > Error on Email field + form submission should not happen
 // 5) Weak password - > Error on password field + form submission should not happen
-// 6) Passowrd and confirm password does not matc- > Error on confirm password field + form submission should not happen
+// 6) Passowrd and confirm password does not match- > Error on confirm password field + form submission should not happen
 
+const isUserEligible = true
 describe("Signin", ()=> {
     beforeEach(()=>{
         cy.visit("https://magento.softwaretestingboard.com/")
@@ -22,7 +23,7 @@ describe("Signin", ()=> {
         cy.get('[title="Password"]').type("Wst673!$").should("have.value", "Wst673!$")
         cy.get('[title="Confirm Password"]').type("Wst673!$").should("have.value", "Wst673!$")
         cy.get('[title="Create an Account"]').click()
-        cy.get("#firstname-error").should("have.text", "This is a required field.")
+        cy.get("#firstname-error").should("have.text", "This is a required field.").and("have.class", "mage-error")
     })
 
     it("No last name provided", ()=> {
@@ -33,6 +34,14 @@ describe("Signin", ()=> {
         cy.get('[title="Password"]').type("Wst673!$").should("have.value", "Wst673!$")
         cy.get('[title="Confirm Password"]').type("Wst673!$").should("have.value", "Wst673!$")
         cy.get('[title="Create an Account"]').click()
-        cy.get("#lastname-error").should("have.text", "This is a required field.")
+        cy.get("#lastname-error").should((el)=> {
+            expect(el[0].textContent).to.equal("This is a required field.")
+        })
+    })
+
+    it("expect", ()=>{
+        const o = { foo: 'bar' }
+        expect(isUserEligible).to.be.true
+        expect(o).to.deep.equal({ foo: 'bar' })
     })
 })
